@@ -20,7 +20,7 @@ use common_raw::{
 
 use crate::error::Error;
 
-pub const SUDT_CODEHASH: [u8; 32] = common::SUDT_TYPE_HASH;
+pub const SUDT_CODEHASH: [u8; 32] = common::SUDT_CODEHASH;
 pub const SUDT_HASHTYPE: u8 = 0u8;
 pub const SUDT_MUSE_ARGS: &[u8] = &[];
 

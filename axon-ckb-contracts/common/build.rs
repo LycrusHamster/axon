@@ -2,7 +2,7 @@ use std::env;
 use std::path::Path;
 
 const GCC_FLAG: &str = "gcc_typehash";
-const SUDT_FLAG: &str = "sudt_typehash";
+const SUDT_FLAG: &str = "sudt_codehash";
 
 /*
 capsule is not support to pass feature or cfg while compilation, thus this build.rs lives
@@ -40,21 +40,21 @@ fn main() {
 
     let sudt_flag = env::var(SUDT_FLAG).unwrap_or("test_sudt".to_string());
 
-    let sudt_typehash = match &sudt_flag[..] {
+    let sudt_codehash = match &sudt_flag[..] {
         "test_sudt" => "test_sudt",
         "dev_sudt" => "dev_sudt",
         "lina_sudt" => "lina_sudt",
         "aggron_sudt" => "aggron_sudt",
         "custom_sudt" => "custom_sudt",
-        _ => panic!("unknown sudt_typehash : {}, this should not happen", sudt_flag),
+        _ => panic!("unknown sudt_codehash : {}, this should not happen", sudt_flag),
     };
 
-    if sudt_typehash == "custom_sudt" && !Path::new(&project_root).join(".").join("sudt_type_hash").exists() {
+    if sudt_codehash == "custom_sudt" && !Path::new(&project_root).join(".").join("sudt_type_hash").exists() {
         panic!(
             "{}=custom_sudt is set, but file 'sudt_type_hash' does not exist under 'common' package",
             SUDT_FLAG
         )
     }
 
-    println!("cargo:rustc-cfg=sudt_typehash=\"{}\"", sudt_typehash);
+    println!("cargo:rustc-cfg=sudt_codehash=\"{}\"", sudt_codehash);
 }
